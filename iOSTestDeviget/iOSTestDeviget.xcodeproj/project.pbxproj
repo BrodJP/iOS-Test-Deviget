@@ -99,13 +99,12 @@
 		9AF12617251E8A350089D562 /* iOSTestDeviget */ = {
 			isa = PBXGroup;
 			children = (
+				9AF1264E251E8C390089D562 /* Models */,
+				9AF1264D251E8C270089D562 /* Scenes */,
+				9AF1264C251E8C200089D562 /* Networking */,
+				9AF1264B251E8C190089D562 /* Resources */,
 				9AF12618251E8A350089D562 /* AppDelegate.swift */,
 				9AF1261A251E8A350089D562 /* SceneDelegate.swift */,
-				9AF1261C251E8A350089D562 /* ViewController.swift */,
-				9AF1261E251E8A350089D562 /* Main.storyboard */,
-				9AF12621251E8A390089D562 /* Assets.xcassets */,
-				9AF12623251E8A390089D562 /* LaunchScreen.storyboard */,
-				9AF12626251E8A390089D562 /* Info.plist */,
 			);
 			path = iOSTestDeviget;
 			sourceTree = "<group>";
@@ -113,6 +112,8 @@
 		9AF1262E251E8A390089D562 /* iOSTestDevigetTests */ = {
 			isa = PBXGroup;
 			children = (
+				9AF12651251E8C880089D562 /* Networking */,
+				9AF12650251E8C830089D562 /* Models */,
 				9AF1262F251E8A390089D562 /* iOSTestDevigetTests.swift */,
 				9AF12631251E8A390089D562 /* Info.plist */,
 			);
@@ -126,6 +127,53 @@
 				9AF1263C251E8A390089D562 /* Info.plist */,
 			);
 			path = iOSTestDevigetUITests;
+			sourceTree = "<group>";
+		};
+		9AF1264B251E8C190089D562 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9AF1261E251E8A350089D562 /* Main.storyboard */,
+				9AF12621251E8A390089D562 /* Assets.xcassets */,
+				9AF12623251E8A390089D562 /* LaunchScreen.storyboard */,
+				9AF12626251E8A390089D562 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9AF1264C251E8C200089D562 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		9AF1264D251E8C270089D562 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				9AF1261C251E8A350089D562 /* ViewController.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		9AF1264E251E8C390089D562 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9AF12650251E8C830089D562 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9AF12651251E8C880089D562 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,7 +486,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AK2ZP4ZDR4;
-				INFOPLIST_FILE = iOSTestDeviget/Info.plist;
+				INFOPLIST_FILE = iOSTestDeviget/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -457,7 +505,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AK2ZP4ZDR4;
-				INFOPLIST_FILE = iOSTestDeviget/Info.plist;
+				INFOPLIST_FILE = iOSTestDeviget/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
