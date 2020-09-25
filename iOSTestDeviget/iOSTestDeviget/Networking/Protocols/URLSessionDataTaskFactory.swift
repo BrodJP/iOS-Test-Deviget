@@ -9,10 +9,20 @@ import Foundation
 
 // Will allow mocking URLSession for Unit Tests
 protocol URLSessionDataTaskFactory {
-    func dataTask(with request: URLRequest,
-                  completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
-    func dataTask(with url: URL,
-                  completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
+    func cancellableDataTask(with request: URLRequest,
+                             completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> CancellableRequest
+    func cancellableDataTask(with url: URL,
+                             completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> CancellableRequest
 }
 
-extension URLSession: URLSessionDataTaskFactory {}
+extension URLSession: URLSessionDataTaskFactory {
+    func cancellableDataTask(with request: URLRequest,
+                             completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> CancellableRequest {
+        return dataTask(with: request, completionHandler: completionHandler)
+    }
+    
+    func cancellableDataTask(with url: URL,
+                             completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> CancellableRequest {
+        return dataTask(with: url, completionHandler: completionHandler)
+    }
+}

@@ -27,6 +27,12 @@
 		9AF12696251E901E0089D562 /* DefaultRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF12695251E901E0089D562 /* DefaultRequester.swift */; };
 		9AF1269B251E90390089D562 /* RequesterError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF1269A251E90390089D562 /* RequesterError.swift */; };
 		9AF126A0251E90910089D562 /* URLSessionDataTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF1269F251E90910089D562 /* URLSessionDataTaskFactory.swift */; };
+		9AF126BF251E9C9D0089D562 /* DefaultRequesterTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF126BE251E9C9D0089D562 /* DefaultRequesterTestCases.swift */; };
+		9AF126C8251E9DDE0089D562 /* URLSessionDataTaskFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF126C7251E9DDE0089D562 /* URLSessionDataTaskFactoryMock.swift */; };
+		9AF126D0251E9E920089D562 /* CancellableRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF126CF251E9E920089D562 /* CancellableRequest.swift */; };
+		9AF126D5251E9F410089D562 /* CancellableRequestMosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF126D4251E9F410089D562 /* CancellableRequestMosk.swift */; };
+		9AF126DA251EA5B70089D562 /* URLParameterEncoderTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF126D9251EA5B70089D562 /* URLParameterEncoderTestCases.swift */; };
+		9AF126DF251EA7B40089D562 /* ParameterEncoderTypeTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF126DE251EA7B40089D562 /* ParameterEncoderTypeTestCases.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +79,12 @@
 		9AF12695251E901E0089D562 /* DefaultRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequester.swift; sourceTree = "<group>"; };
 		9AF1269A251E90390089D562 /* RequesterError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequesterError.swift; sourceTree = "<group>"; };
 		9AF1269F251E90910089D562 /* URLSessionDataTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskFactory.swift; sourceTree = "<group>"; };
+		9AF126BE251E9C9D0089D562 /* DefaultRequesterTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRequesterTestCases.swift; sourceTree = "<group>"; };
+		9AF126C7251E9DDE0089D562 /* URLSessionDataTaskFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskFactoryMock.swift; sourceTree = "<group>"; };
+		9AF126CF251E9E920089D562 /* CancellableRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableRequest.swift; sourceTree = "<group>"; };
+		9AF126D4251E9F410089D562 /* CancellableRequestMosk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableRequestMosk.swift; sourceTree = "<group>"; };
+		9AF126D9251EA5B70089D562 /* URLParameterEncoderTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoderTestCases.swift; sourceTree = "<group>"; };
+		9AF126DE251EA7B40089D562 /* ParameterEncoderTypeTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoderTypeTestCases.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +148,7 @@
 		9AF1262E251E8A390089D562 /* iOSTestDevigetTests */ = {
 			isa = PBXGroup;
 			children = (
+				9AF126C6251E9DC80089D562 /* Mocks */,
 				9AF12651251E8C880089D562 /* Networking */,
 				9AF12650251E8C830089D562 /* Models */,
 				9AF1262F251E8A390089D562 /* iOSTestDevigetTests.swift */,
@@ -201,6 +214,10 @@
 		9AF12651251E8C880089D562 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				9AF126BA251E9C510089D562 /* Endpoints */,
+				9AF126BB251E9C580089D562 /* Requester */,
+				9AF126BC251E9C680089D562 /* Service */,
+				9AF126BD251E9C6C0089D562 /* Utils */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -230,6 +247,7 @@
 				9AF12683251E8F2F0089D562 /* URLParameterEncoder.swift */,
 				9AF12688251E8F650089D562 /* ParameterEncoderType.swift */,
 				9AF1268D251E8F7B0089D562 /* RequestError.swift */,
+				9AF126CF251E9E920089D562 /* CancellableRequest.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -250,6 +268,46 @@
 			children = (
 			);
 			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		9AF126BA251E9C510089D562 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		9AF126BB251E9C580089D562 /* Requester */ = {
+			isa = PBXGroup;
+			children = (
+				9AF126BE251E9C9D0089D562 /* DefaultRequesterTestCases.swift */,
+			);
+			path = Requester;
+			sourceTree = "<group>";
+		};
+		9AF126BC251E9C680089D562 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		9AF126BD251E9C6C0089D562 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9AF126D9251EA5B70089D562 /* URLParameterEncoderTestCases.swift */,
+				9AF126DE251EA7B40089D562 /* ParameterEncoderTypeTestCases.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		9AF126C6251E9DC80089D562 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				9AF126C7251E9DDE0089D562 /* URLSessionDataTaskFactoryMock.swift */,
+				9AF126D4251E9F410089D562 /* CancellableRequestMosk.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +442,7 @@
 			files = (
 				9AF12675251E8EF00089D562 /* HTTPTask.swift in Sources */,
 				9AF12668251E8E8C0089D562 /* ParameterEncoder.swift in Sources */,
+				9AF126D0251E9E920089D562 /* CancellableRequest.swift in Sources */,
 				9AF1261D251E8A350089D562 /* ViewController.swift in Sources */,
 				9AF12619251E8A350089D562 /* AppDelegate.swift in Sources */,
 				9AF1265B251E8E770089D562 /* Endpoint.swift in Sources */,
@@ -404,6 +463,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AF126DA251EA5B70089D562 /* URLParameterEncoderTestCases.swift in Sources */,
+				9AF126D5251E9F410089D562 /* CancellableRequestMosk.swift in Sources */,
+				9AF126DF251EA7B40089D562 /* ParameterEncoderTypeTestCases.swift in Sources */,
+				9AF126C8251E9DDE0089D562 /* URLSessionDataTaskFactoryMock.swift in Sources */,
+				9AF126BF251E9C9D0089D562 /* DefaultRequesterTestCases.swift in Sources */,
 				9AF12630251E8A390089D562 /* iOSTestDevigetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

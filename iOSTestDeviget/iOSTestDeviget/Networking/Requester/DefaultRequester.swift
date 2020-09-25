@@ -23,13 +23,13 @@ class DefaultRequester: Requester {
                                completion: @escaping (Result<T, Error>) -> Void) {
         do {
             let request = try self.buildRequest(from: endpoint)
-            let task = dataTaskFactory.dataTask(with: request,
-                                                completionHandler: { [weak self] data, response, error in
-                                                    self?.handleResponse(data: data,
-                                                                         response: response,
-                                                                         error: error,
-                                                                         completion: completion)
-                                                })
+            let task = dataTaskFactory.cancellableDataTask(with: request,
+                                                           completionHandler: { [weak self] data, response, error in
+                                                            self?.handleResponse(data: data,
+                                                                                 response: response,
+                                                                                 error: error,
+                                                                                 completion: completion)
+                                                           })
             task.resume()
         } catch {
             completion(.failure(error))
@@ -73,7 +73,7 @@ class DefaultRequester: Requester {
                     return
                 }
                 if let jsonString = String(data: responseData, encoding: .utf8) {
-                    //print(jsonString)
+                    print(jsonString)
                 }
                 do {
                     let apiResponse = try JSONDecoder().decode(T.self, from: responseData)
