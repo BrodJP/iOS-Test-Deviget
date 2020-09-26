@@ -23,14 +23,15 @@ struct RedditPostCollectionViewModel {
     
     weak var delegate: RedditPostCollectionViewModelDelegate?
     
-    init(redditPost: RedditPostDTO) {
+    init(redditPost: RedditPostDTO,
+         currentDate: DateProvider = Date()) {
         self.title = redditPost.redditPost.title
         self.author = redditPost.redditPost.author
         
-        let millisecodsPerHour: TimeInterval = 1000*60*60
-        let currentMilliseconds = Date().timeIntervalSince1970
-        let elapsedTimeInMillisecods = currentMilliseconds - redditPost.redditPost.createdTimeInUnix
-        let elapsedTimeInHours = elapsedTimeInMillisecods/millisecodsPerHour
+        let secondsPerHour: TimeInterval = 3600
+        let currentSeconds = currentDate.timeIntervalSince1970
+        let elapsedTimeInSeconds = currentSeconds - redditPost.redditPost.createdTimeInUnix
+        let elapsedTimeInHours = elapsedTimeInSeconds/secondsPerHour
         
         self.entryDateString = String(format: "%.2f hours ago", elapsedTimeInHours)
         self.thumbnailURL = redditPost.redditPost.thumbnail
