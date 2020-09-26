@@ -10,6 +10,11 @@ import Foundation
 struct MasteViewModelDataSource: Codable {
     var currentPage: TopRedditPage?
     var posts: [RedditPostDTO] = []
+    
+    mutating func clear() {
+        currentPage = nil
+        posts = []
+    }
 }
 
 class DefaultMasterViewModel: MasterViewModel {
@@ -33,16 +38,17 @@ class DefaultMasterViewModel: MasterViewModel {
         return dataSource.posts
     }
     
-    private var dataSource: MasteViewModelDataSource = MasteViewModelDataSource()
+    private var dataSource: MasteViewModelDataSource
     private(set) var selectedPost: RedditPostDTO?
     
-    init(service: TopRedditProviderService = DefaultTopRedditProviderService()) {
+    init(service: TopRedditProviderService = DefaultTopRedditProviderService(),
+         dataSource: MasteViewModelDataSource = MasteViewModelDataSource()) {
         self.service = service
+        self.dataSource = dataSource
     }
     
     func initialize() {
-        dataSource.currentPage = nil
-        dataSource.posts = []
+        dataSource.clear()
         selectedPost = nil
         requestMorePosts()
     }
@@ -79,15 +85,13 @@ class DefaultMasterViewModel: MasterViewModel {
     }
     
     func dismissAllPosts() {
-        dataSource = MasteViewModelDataSource()
+        dataSource.clear()
         selectedPost = nil
         reloadData()
     }
     
-    func reloadData() {
-        DispatchQueue.main.async { [weak bindingDelegate] in
-            bindingDelegate?.reloadAllData()
-        }
+    private func reloadData() {
+        bindingDelegate?.reloadAllData()
     }
     
     private func requestMorePostsUsingPage(_ page: TopRedditPage?) {
@@ -103,9 +107,11 @@ class DefaultMasterViewModel: MasterViewModel {
             let newPage = TopRedditPage(after: topRedditResult.afterPage)
             var currentPosts = dataSource.posts
             currentPosts.append(contentsOf: topRedditResult.posts.map({ RedditPostDTO(redditPost: $0) }))
-            dataSource = MasteViewModelDataSource(currentPage: newPage,
-                                                  posts: currentPosts)
-            reloadData()
+            dataSource.currentPage = newPage
+            dataSource.posts = currentPosts
+            DispatchQueue.main.async { [weak self] in
+                self?.reloadData()
+            }
         case .failure(let error):
             debugPrint("Handle error: \(error.localizedDescription)")
         }

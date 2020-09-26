@@ -14,7 +14,7 @@ protocol TopRedditProviderService {
 
 class DefaultTopRedditProviderService: TopRedditProviderService {
     let requester: Requester
-    private var currentTask: CancellableRequest?
+    private(set) var currentTask: CancellableRequest?
     
     init(requester: Requester = DefaultRequester()) {
         self.requester = requester

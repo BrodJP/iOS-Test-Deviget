@@ -9,6 +9,18 @@ import Foundation
 @testable import iOSTestDeviget
 
 class CancellableRequestMock: CancellableRequest {
-    func cancel() {}
-    func resume() {}
+    enum Status {
+        case cancelled
+        case inProgress
+        case notInitiated
+    }
+    
+    var status: Status = .notInitiated
+    
+    func cancel() {
+        status = .cancelled
+    }
+    func resume() {
+        status = .inProgress
+    }
 }
