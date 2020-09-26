@@ -39,7 +39,7 @@ class MasterViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-  
+        
     }
 
     func setupView() {
@@ -102,6 +102,7 @@ class MasterViewController: UIViewController {
                                                    heightDimension: .estimated(200))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                            subitems: [item])
+            group.interItemSpacing = NSCollectionLayoutSpacing.fixed(8)
             let section = NSCollectionLayoutSection(group: group)
             return section
         }

@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -56,26 +57,74 @@
             </objects>
             <point key="canvasLocation" x="120" y="-164"/>
         </scene>
-        <!--View Controller-->
+        <!--Master View Controller-->
         <scene sceneID="kV0-Zj-hdt">
             <objects>
-                <viewController id="Z0l-yE-Ud2" sceneMemberID="viewController">
+                <viewController id="Z0l-yE-Ud2" customClass="MasterViewController" customModule="iOSTestDeviget" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="irr-Me-qh8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hqM-r6-PnC">
+                                <rect key="frame" x="0.0" y="88" width="414" height="724"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uHL-dj-ue2">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="KR4-Wx-bcI">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kRA-fA-zVq">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcX-rJ-Et6">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="OFW-XG-pxf"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapDismissAllButton:" destination="Z0l-yE-Ud2" eventType="touchUpInside" id="hg3-Bi-VNc"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="qyv-J8-PYh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qyv-J8-PYh" firstAttribute="trailing" secondItem="QcX-rJ-Et6" secondAttribute="trailing" id="8de-tj-Nbl"/>
+                            <constraint firstItem="hqM-r6-PnC" firstAttribute="top" secondItem="qyv-J8-PYh" secondAttribute="top" id="A59-vP-SgJ"/>
+                            <constraint firstItem="qyv-J8-PYh" firstAttribute="bottom" secondItem="QcX-rJ-Et6" secondAttribute="bottom" id="Dpn-XM-QQk"/>
+                            <constraint firstItem="qyv-J8-PYh" firstAttribute="trailing" secondItem="hqM-r6-PnC" secondAttribute="trailing" id="Va1-k7-E7J"/>
+                            <constraint firstItem="QcX-rJ-Et6" firstAttribute="leading" secondItem="qyv-J8-PYh" secondAttribute="leading" id="Vxk-di-NRb"/>
+                            <constraint firstItem="QcX-rJ-Et6" firstAttribute="top" secondItem="hqM-r6-PnC" secondAttribute="bottom" id="ZPc-GA-no3"/>
+                            <constraint firstItem="hqM-r6-PnC" firstAttribute="leading" secondItem="qyv-J8-PYh" secondAttribute="leading" id="n3p-Mi-RNf"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DRV-S7-uCi"/>
+                    <connections>
+                        <outlet property="collectionView" destination="hqM-r6-PnC" id="WTn-J1-OCa"/>
+                        <outlet property="dismissAllButton" destination="QcX-rJ-Et6" id="z7R-oJ-825"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HOZ-oF-tpT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="948" y="-164"/>
         </scene>
-        <!--Split View Controller-->
+        <!--Base Split View Controller-->
         <scene sceneID="gAi-aX-w5e">
             <objects>
-                <splitViewController allowDoubleColumnStyle="YES" id="vJS-dn-p0j" sceneMemberID="viewController">
+                <splitViewController allowDoubleColumnStyle="YES" id="vJS-dn-p0j" customClass="BaseSplitViewController" customModule="iOSTestDeviget" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="byO-PJ-5tk" kind="relationship" relationship="masterViewController" id="n03-9n-eyv"/>
                         <segue destination="DIE-dW-Xci" kind="relationship" relationship="detailViewController" id="MGe-wS-12V"/>
@@ -89,6 +138,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

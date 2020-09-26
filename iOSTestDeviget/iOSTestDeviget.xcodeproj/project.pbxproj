@@ -12,6 +12,7 @@
 		9A73F99E251FA1C300DD1C2B /* TopRedditProviderServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A73F99D251FA1C300DD1C2B /* TopRedditProviderServiceMock.swift */; };
 		9A73F9A3251FAD0700DD1C2B /* TopRedditProviderServiceTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A73F9A2251FAD0700DD1C2B /* TopRedditProviderServiceTestCases.swift */; };
 		9A73F9A8251FAE0F00DD1C2B /* RequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A73F9A7251FAE0F00DD1C2B /* RequesterMock.swift */; };
+		9A73F9AD251FB1B200DD1C2B /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A73F9AC251FB1B200DD1C2B /* ImageDownloader.swift */; };
 		9AF12619251E8A350089D562 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF12618251E8A350089D562 /* AppDelegate.swift */; };
 		9AF1261B251E8A350089D562 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF1261A251E8A350089D562 /* SceneDelegate.swift */; };
 		9AF1261D251E8A350089D562 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF1261C251E8A350089D562 /* ViewController.swift */; };
@@ -76,6 +77,7 @@
 		9A73F99D251FA1C300DD1C2B /* TopRedditProviderServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRedditProviderServiceMock.swift; sourceTree = "<group>"; };
 		9A73F9A2251FAD0700DD1C2B /* TopRedditProviderServiceTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRedditProviderServiceTestCases.swift; sourceTree = "<group>"; };
 		9A73F9A7251FAE0F00DD1C2B /* RequesterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequesterMock.swift; sourceTree = "<group>"; };
+		9A73F9AC251FB1B200DD1C2B /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		9AF12615251E8A350089D562 /* iOSTestDeviget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTestDeviget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF12618251E8A350089D562 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AF1261A251E8A350089D562 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				9AF126E8251EB0890089D562 /* TopRedditProviderService.swift */,
+				9A73F9AC251FB1B200DD1C2B /* ImageDownloader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				9AF1268E251E8F7B0089D562 /* RequestError.swift in Sources */,
 				9AF1261B251E8A350089D562 /* SceneDelegate.swift in Sources */,
 				9AF12684251E8F2F0089D562 /* URLParameterEncoder.swift in Sources */,
+				9A73F9AD251FB1B200DD1C2B /* ImageDownloader.swift in Sources */,
 				9AF1270A251ED38B0089D562 /* DefaultMasterViewModel.swift in Sources */,
 				9AF126A0251E90910089D562 /* URLSessionDataTaskFactory.swift in Sources */,
 				9AF1267A251E8F050089D562 /* Parameters.swift in Sources */,

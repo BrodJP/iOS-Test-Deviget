@@ -12,11 +12,31 @@ protocol RedditPostCollectionViewModelDelegate: class {
 }
 
 struct RedditPostCollectionViewModel {
+    let title: String
+    let author: String
+    let entryDateString: String
+    let thumbnailURL: URL?
+    let numberOfCommentsString: String
+    let isRead: Bool
+    let isSelected: Bool
     private let redditPost: RedditPostDTO
     
     weak var delegate: RedditPostCollectionViewModelDelegate?
     
     init(redditPost: RedditPostDTO) {
+        self.title = redditPost.redditPost.title
+        self.author = redditPost.redditPost.author
+        
+        let millisecodsPerHour: TimeInterval = 1000*60*60
+        let currentMilliseconds = Date().timeIntervalSince1970
+        let elapsedTimeInMillisecods = currentMilliseconds - redditPost.redditPost.createdTimeInUnix
+        let elapsedTimeInHours = elapsedTimeInMillisecods/millisecodsPerHour
+        
+        self.entryDateString = String(format: "%.2f hours ago", elapsedTimeInHours)
+        self.thumbnailURL = redditPost.redditPost.thumbnail
+        self.numberOfCommentsString = "\(redditPost.redditPost.numberOfComments) comments"
+        self.isRead = redditPost.isRead
+        self.isSelected = redditPost.isSelected
         self.redditPost = redditPost
     }
     
