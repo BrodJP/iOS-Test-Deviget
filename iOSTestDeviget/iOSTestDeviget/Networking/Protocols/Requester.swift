@@ -9,5 +9,5 @@ import Foundation
 
 protocol Requester: class {
     func request<T: Decodable>(_ endpoint: Endpoint,
-                               completion: @escaping (Result<T, Error>) -> Void)
+                               completion: @escaping (Result<T, Error>) -> Void)  -> CancellableRequest?
 }

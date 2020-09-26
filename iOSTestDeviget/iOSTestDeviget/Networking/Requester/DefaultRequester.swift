@@ -20,7 +20,7 @@ class DefaultRequester: Requester {
     }
     
     func request<T: Decodable>(_ endpoint: Endpoint,
-                               completion: @escaping (Result<T, Error>) -> Void) {
+                               completion: @escaping (Result<T, Error>) -> Void) -> CancellableRequest? {
         do {
             let request = try self.buildRequest(from: endpoint)
             let task = dataTaskFactory.cancellableDataTask(with: request,
@@ -31,8 +31,10 @@ class DefaultRequester: Requester {
                                                                                  completion: completion)
                                                            })
             task.resume()
+            return task
         } catch {
             completion(.failure(error))
+            return nil
         }
     }
  
