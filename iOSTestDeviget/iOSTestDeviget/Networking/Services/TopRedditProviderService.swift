@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TopRedditProviderService {
-    func fetchTopReddit(using page: String?,
+    func fetchTopReddit(using page: TopRedditPage?,
                         completion: @escaping (Result<TopRedditResult, Error>) -> Void)
 }
 
@@ -20,9 +20,9 @@ class DefaultTopRedditProviderService: TopRedditProviderService {
         self.requester = requester
     }
     
-    func fetchTopReddit(using page: String?,
+    func fetchTopReddit(using page: TopRedditPage?,
                         completion: @escaping (Result<TopRedditResult, Error>) -> Void) {
         currentTask?.cancel()
-        currentTask = requester.request(RedditEndpoint.top(after: page), completion: completion)
+        currentTask = requester.request(RedditEndpoint.top(after: page?.after), completion: completion)
     }
 }
