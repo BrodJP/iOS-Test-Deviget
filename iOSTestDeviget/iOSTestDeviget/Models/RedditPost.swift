@@ -15,14 +15,16 @@ struct RedditPost: Codable {
     let thumbnail: URL?
     let contentURL: URL?
     let numberOfComments: Int
+    let isVideo: Bool
     
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case title
         case author
-        case createdTimeInUnix = "created"
+        case createdTimeInUnix = "created_utc"
         case thumbnail
         case contentURL = "url"
         case numberOfComments = "num_comments"
+        case isVideo = "is_video"
     }
 }

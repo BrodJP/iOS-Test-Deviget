@@ -11,6 +11,14 @@ class RedditPostDTO: Codable, Hashable {
     let redditPost: RedditPost
     var isRead: Bool
     var isSelected: Bool
+    var mediaType: MediaType {
+        if redditPost.isVideo == true {
+            return .video
+        } else if redditPost.contentURL?.absoluteString.hasSuffix(".jpg") ?? false {
+            return .image
+        }
+        return .unknown
+    }
     
     init(redditPost: RedditPost) {
         self.redditPost = redditPost

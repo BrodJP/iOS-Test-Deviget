@@ -20,6 +20,10 @@ class MasterViewController: UIViewController {
     enum Constants {
         static let cellNameAndIdentifier = "RedditPostCollectionViewCell"
     }
+    
+    enum SegueID {
+        static let detailIdentifier = "ShowDetail"
+    }
  
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var dismissAllButton: UIButton!
@@ -39,7 +43,18 @@ class MasterViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let navigationController = segue.destination as? UINavigationController,
+            let viewController = navigationController.topViewController as? DetailViewController
+        else {
+            fatalError()
+        }
         
+        viewController.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+        viewController.navigationItem.leftItemsSupplementBackButton = true
+        
+        if let selectedPost = viewModel.selectedPost {
+            viewController.viewModel = DefaultDetailViewModel(redditPost: selectedPost)
+        }
     }
 
     func setupView() {
@@ -125,6 +140,10 @@ class MasterViewController: UIViewController {
     private func refreshRedditPosts(_ sender: Any) {
         viewModel.initialize()
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -136,6 +155,7 @@ extension MasterViewController: UICollectionViewDelegate {
           return
         }
         viewModel.selectPost(redditPost)
+        performSegue(withIdentifier: SegueID.detailIdentifier, sender: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView,
