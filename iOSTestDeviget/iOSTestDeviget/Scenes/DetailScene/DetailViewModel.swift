@@ -17,43 +17,25 @@ protocol DetailViewModel {
     var validContent: Bool { get }
 }
 
-class DefaultDetailViewModel: DetailViewModel {
-    enum Constants {
-        static let coderRestorationID = "PostDetailObject"
-    }
-    
-    var redditPost: RedditPostDTO?
-    
-    init(redditPost: RedditPostDTO? = nil) {
-        self.redditPost = redditPost
-    }
+struct DefaultDetailViewModel: DetailViewModel {
+    let redditPostAuthor: String?
+    let redditPostText: String?
+    let redditPostThumbnailURL: URL?
+    let contentURL: URL?
+    let mediaType: MediaType
+    let validContent: Bool
     
     var isVideoString: String {
         "(Video)"
     }
     
-    var redditPostAuthor: String? {
-        redditPost?.redditPost.author
-    }
-    
-    var redditPostText: String? {
-        redditPost?.redditPost.title
-    }
-    
-    var redditPostThumbnailURL: URL? {
-        redditPost?.redditPost.thumbnail
-    }
-    
-    var contentURL: URL? {
-        redditPost?.redditPost.contentURL
-    }
-    
-    var mediaType: MediaType {
-        redditPost?.mediaType ?? .unknown
-    }
-    
-    var validContent: Bool {
-        redditPost != nil
+    init(redditPost: RedditPostDTO? = nil) {
+        redditPostAuthor = redditPost?.redditPost.author
+        redditPostText = redditPost?.redditPost.title
+        redditPostThumbnailURL = redditPost?.redditPost.thumbnail
+        contentURL = redditPost?.redditPost.contentURL
+        mediaType = redditPost?.mediaType ?? .unknown
+        validContent = redditPost != nil
     }
 }
 

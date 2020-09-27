@@ -10,6 +10,15 @@ import XCTest
 
 class RedditPostDTOTestCases: XCTestCase {
 
+    let redditPost = RedditPost(identifier: "FirstIdentifier",
+                                title: "",
+                                author: "",
+                                createdTimeInUnix: Date().timeIntervalSince1970,
+                                thumbnail: nil,
+                                contentURL: nil,
+                                numberOfComments: 0,
+                                isVideo: false)
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -19,17 +28,10 @@ class RedditPostDTOTestCases: XCTestCase {
     }
 
     func test_equalModels_given_falseSelectedAndFalseRead() throws {
-        let redditPost = RedditPost(identifier: "MockIdentifier",
-                                    title: "",
-                                    author: "",
-                                    createdTimeInUnix: Date().timeIntervalSince1970,
-                                    thumbnail: nil,
-                                    contentURL: nil,
-                                    numberOfComments: 0)
-        let firstPost = RedditPostDTO(redditPost: redditPost)
+        var firstPost = RedditPostDTO(redditPost: redditPost)
         firstPost.isSelected = false
         firstPost.isRead = false
-        let secondPost = RedditPostDTO(redditPost: redditPost)
+        var secondPost = RedditPostDTO(redditPost: redditPost)
         secondPost.isSelected = false
         secondPost.isRead = false
         
@@ -37,17 +39,10 @@ class RedditPostDTOTestCases: XCTestCase {
     }
     
     func test_equalModels_given_trueSelectedAndTrueRead() throws {
-        let redditPost = RedditPost(identifier: "MockIdentifier",
-                                    title: "",
-                                    author: "",
-                                    createdTimeInUnix: Date().timeIntervalSince1970,
-                                    thumbnail: nil,
-                                    contentURL: nil,
-                                    numberOfComments: 0)
-        let firstPost = RedditPostDTO(redditPost: redditPost)
+        var firstPost = RedditPostDTO(redditPost: redditPost)
         firstPost.isSelected = true
         firstPost.isRead = true
-        let secondPost = RedditPostDTO(redditPost: redditPost)
+        var secondPost = RedditPostDTO(redditPost: redditPost)
         secondPost.isSelected = true
         secondPost.isRead = true
         
@@ -55,17 +50,10 @@ class RedditPostDTOTestCases: XCTestCase {
     }
     
     func test_equalModels_given_trueSelectedAndFalseRead() throws {
-        let redditPost = RedditPost(identifier: "MockIdentifier",
-                                    title: "",
-                                    author: "",
-                                    createdTimeInUnix: Date().timeIntervalSince1970,
-                                    thumbnail: nil,
-                                    contentURL: nil,
-                                    numberOfComments: 0)
-        let firstPost = RedditPostDTO(redditPost: redditPost)
+        var firstPost = RedditPostDTO(redditPost: redditPost)
         firstPost.isSelected = true
         firstPost.isRead = false
-        let secondPost = RedditPostDTO(redditPost: redditPost)
+        var secondPost = RedditPostDTO(redditPost: redditPost)
         secondPost.isSelected = true
         secondPost.isRead = false
         
@@ -73,26 +61,20 @@ class RedditPostDTOTestCases: XCTestCase {
     }
     
     func test_notEqualModels_givenDifferentPostID() throws {
-        let firstRedditPost = RedditPost(identifier: "FirstIdentifier",
-                                         title: "",
-                                         author: "",
-                                         createdTimeInUnix: Date().timeIntervalSince1970,
-                                         thumbnail: nil,
-                                         contentURL: nil,
-                                         numberOfComments: 0)
-        
+        let firstRedditPost = redditPost
         let secondRedditPost = RedditPost(identifier: "SecondIdentifier",
                                           title: "",
                                           author: "",
                                           createdTimeInUnix: Date().timeIntervalSince1970,
                                           thumbnail: nil,
                                           contentURL: nil,
-                                          numberOfComments: 0)
+                                          numberOfComments: 0,
+                                          isVideo: false)
         
-        let firstPost = RedditPostDTO(redditPost: firstRedditPost)
+        var firstPost = RedditPostDTO(redditPost: firstRedditPost)
         firstPost.isSelected = false
         firstPost.isRead = false
-        let secondPost = RedditPostDTO(redditPost: secondRedditPost)
+        var secondPost = RedditPostDTO(redditPost: secondRedditPost)
         secondPost.isSelected = false
         secondPost.isRead = false
         

@@ -9,15 +9,17 @@ import XCTest
 @testable import iOSTestDeviget
 
 private class MasterViewModelBindingMock: MasterViewModelBinding {
+ 
     var reloadAllDataCalled: Bool = false
     var reloadRedditPostsCalled: Bool = false
+    var showDetailCalled: Bool = false
     
     func reloadAllData() {
         reloadAllDataCalled = true
     }
     
-    func reloadRedditPosts(_ posts: [RedditPostDTO]) {
-        reloadRedditPostsCalled = true
+    func showDetail() {
+        showDetailCalled = true
     }
 }
 
@@ -90,28 +92,84 @@ class DefaultMasterViewModelTestCases: XCTestCase {
         let bindingDelegate = MasterViewModelBindingMock()
         let viewModel = DefaultMasterViewModel()
         viewModel.bindingDelegate = bindingDelegate
-        let mockPostDTO = RedditPostDTO(redditPost: mockPost)
+        var mockPostDTO = RedditPostDTO(redditPost: mockPost)
         mockPostDTO.isSelected = false
+        
         viewModel.selectPost(mockPostDTO)
         
-        XCTAssertTrue(mockPostDTO.isSelected)
-        XCTAssertTrue(bindingDelegate.reloadRedditPostsCalled, "Expected to reload selected and deselected posts")
+        XCTAssertEqual(viewModel.selectedPost?.redditPost.identifier, mockPost.identifier)
+        XCTAssertTrue(viewModel.selectedPost?.isSelected == true)
+        XCTAssertTrue(bindingDelegate.reloadAllDataCalled, "Expected to reload UI posts")
+        XCTAssertTrue(bindingDelegate.showDetailCalled, "Expected to trigger shot detail of selected Post")
     }
     
     func test_selectPost_deselectPreviousSelectedPost() {
-        let viewModel = DefaultMasterViewModel()
-        let oldPostDTO = RedditPostDTO(redditPost: mockPost)
+        var dataSource = MasteViewModelDataSource()
+        
+        var oldPostDTO = RedditPostDTO(redditPost: mockPost)
         oldPostDTO.isSelected = false
-        let newPostDTO = RedditPostDTO(redditPost: mockPost)
+        var newPostDTO = RedditPostDTO(redditPost: mockPost)
         newPostDTO.isSelected = false
+        
+        // Populate mock fetched dataSource
+        dataSource.posts = [oldPostDTO, newPostDTO]
+        
+        let viewModel = DefaultMasterViewModel(dataSource: dataSource)
+        
+        // Selects oldPostDTO first
         viewModel.selectPost(oldPostDTO)
+        
+        // Check oldPostDTO entity was selected
+        oldPostDTO = viewModel.redditPosts.first(where: { $0.redditPost.identifier == oldPostDTO.redditPost.identifier })!
+        XCTAssertTrue(oldPostDTO.isSelected)
+        XCTAssertEqual(viewModel.selectedPost, oldPostDTO)
+        
+        // Selects newPostDTO
         viewModel.selectPost(newPostDTO)
         
-        XCTAssertFalse(oldPostDTO.isSelected, "Expected to deselect old previos post")
-        XCTAssertTrue(newPostDTO.isSelected, "Expected to select new previos post")
+        // Check oldPostDTO entity was deselected
+        oldPostDTO = viewModel.redditPosts.first(where: { $0.redditPost.identifier == oldPostDTO.redditPost.identifier })!
+        XCTAssertFalse(oldPostDTO.isSelected)
+        XCTAssertNotEqual(viewModel.selectedPost, oldPostDTO)
     }
     
-    func test_dismissPost_executesReloadAllData() {
+    func test_dismissPost_removesPostFromDatasource() {
+        var dataSource = MasteViewModelDataSource()
+        let postToBeDismiss = RedditPostDTO(redditPost: mockPost)
+        dataSource.posts = [postToBeDismiss]
+        
+        let viewModel = DefaultMasterViewModel(dataSource: dataSource)
+        
+        XCTAssertFalse(viewModel.redditPosts.isEmpty)
+        
+        viewModel.dismissPost(postToBeDismiss)
+        
+        XCTAssertTrue(viewModel.redditPosts.isEmpty)
+    }
+    
+    func test_dismissPost_clearsSelectedPost_ifItWasSelectedBefore() {
+        var dataSource = MasteViewModelDataSource()
+        let postToBeSelected = RedditPostDTO(redditPost: mockPost)
+        dataSource.posts = [postToBeSelected]
+        
+        let viewModel = DefaultMasterViewModel(dataSource: dataSource)
+        
+        XCTAssertNil(viewModel.selectedPost)
+        
+        viewModel.selectPost(postToBeSelected)
+        
+        XCTAssertNotNil(viewModel.selectedPost)
+        
+        // Remember this is a struct, we are making isSelected/isRead = true to ensure is equal to the one stored on dataSource
+        var postToBeDismissed = postToBeSelected
+        postToBeDismissed.isSelected = true
+        postToBeDismissed.isRead = true
+        viewModel.dismissPost(postToBeDismissed)
+        
+        XCTAssertNil(viewModel.selectedPost)
+    }
+    
+    func test_dismissAllPost_executesReloadAllData() {
         let bindingDelegate = MasterViewModelBindingMock()
         let viewModel = DefaultMasterViewModel()
         viewModel.bindingDelegate = bindingDelegate
@@ -121,7 +179,7 @@ class DefaultMasterViewModelTestCases: XCTestCase {
         XCTAssertTrue(bindingDelegate.reloadAllDataCalled)
     }
     
-    func test_dismissPost_clearPostsData() {
+    func test_dismissAllPost_clearPostsData() {
         var dataSource = MasteViewModelDataSource()
         let mockPostDTO = RedditPostDTO(redditPost: mockPost)
         dataSource.posts = [mockPostDTO]

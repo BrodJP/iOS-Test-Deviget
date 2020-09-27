@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Data Transfer Object
 struct RedditPostDTO: Codable, Hashable {
     let redditPost: RedditPost
     var isRead: Bool

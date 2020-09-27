@@ -29,7 +29,8 @@ class RedditPostCollectionViewModelTestCases: XCTestCase {
                                 createdTimeInUnix: Constants.oneHoursInSeconds,
                                 thumbnail: URL(string: Constants.thumbnailURLString),
                                 contentURL: URL(string: Constants.contentURLString),
-                                numberOfComments: 777)
+                                numberOfComments: 777,
+                                isVideo: false)
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -40,7 +41,7 @@ class RedditPostCollectionViewModelTestCases: XCTestCase {
     }
 
     func test_initialization() {
-        let redditPostDTO = RedditPostDTO(redditPost: redditPost)
+        var redditPostDTO = RedditPostDTO(redditPost: redditPost)
         redditPostDTO.isSelected = true
         redditPostDTO.isRead = true
         

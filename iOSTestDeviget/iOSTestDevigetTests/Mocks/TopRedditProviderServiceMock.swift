@@ -9,11 +9,16 @@ import Foundation
 @testable import iOSTestDeviget
 
 class TopRedditProviderServiceMock: TopRedditProviderService {
-    
+  
     var fetchTopRedditCalled: Bool = false
+    var cancelRequestCalled: Bool = false
     
     func fetchTopReddit(using page: TopRedditPage?,
                         completion: @escaping (Result<TopRedditResult, Error>) -> Void) {
         fetchTopRedditCalled = true
+    }
+    
+    func cancelCurrentRequest() {
+        cancelRequestCalled = false
     }
 }
