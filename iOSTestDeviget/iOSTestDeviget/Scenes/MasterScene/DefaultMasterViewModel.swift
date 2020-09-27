@@ -10,17 +10,20 @@ import Foundation
 struct MasteViewModelDataSource: Codable {
     var currentPage: TopRedditPage?
     var posts: [RedditPostDTO] = []
+    var selectedPost: RedditPostDTO?
     
     mutating func clear() {
         currentPage = nil
         posts = []
+        selectedPost = nil
     }
 }
 
 class DefaultMasterViewModel: MasterViewModel {
-    
+
     enum Constants {
         static let maxNumberOfPosts = 50
+        static let coderRestorationID = "DatasourceDetailObject"
     }
     
     let service: TopRedditProviderService
@@ -38,8 +41,11 @@ class DefaultMasterViewModel: MasterViewModel {
         return dataSource.posts
     }
     
+    var selectedPost: RedditPostDTO? {
+        dataSource.selectedPost
+    }
+    
     private var dataSource: MasteViewModelDataSource
-    private(set) var selectedPost: RedditPostDTO?
     
     init(service: TopRedditProviderService = DefaultTopRedditProviderService(),
          dataSource: MasteViewModelDataSource = MasteViewModelDataSource()) {
@@ -49,7 +55,6 @@ class DefaultMasterViewModel: MasterViewModel {
     
     func initialize() {
         dataSource.clear()
-        selectedPost = nil
         requestMorePosts()
     }
     
@@ -60,17 +65,31 @@ class DefaultMasterViewModel: MasterViewModel {
     }
     
     func selectPost(_ post: RedditPostDTO) {
-        var postsToReload = [post]
-        
-        if let selectedPost = selectedPost {
-            selectedPost.isSelected = false
-            postsToReload.append(selectedPost)
+        var mutablePost = post
+        guard dataSource.selectedPost != mutablePost else {
+            bindingDelegate?.showDetail()
+            return
         }
         
-        post.isRead = true
-        post.isSelected = true
-        selectedPost = post
-        bindingDelegate?.reloadRedditPosts(postsToReload)
+        let indexOfNewSelection = dataSource.posts.firstIndex(of: mutablePost)
+        mutablePost.isRead = true
+        mutablePost.isSelected = true
+        
+        if let index = indexOfNewSelection {
+            dataSource.posts[index] = mutablePost
+        }
+        
+        if var selectedPost = dataSource.selectedPost {
+            let indexOfOldSelection = dataSource.posts.firstIndex(of: selectedPost)
+            selectedPost.isSelected = false
+            if let index = indexOfOldSelection {
+                dataSource.posts[index] = selectedPost
+            }
+        }
+        
+        dataSource.selectedPost = mutablePost
+        reloadData()
+        bindingDelegate?.showDetail()
     }
     
     func dismissPost(_ post: RedditPostDTO) {
@@ -78,20 +97,40 @@ class DefaultMasterViewModel: MasterViewModel {
             return
         }
         dataSource.posts.remove(at: index)
-        if selectedPost == post {
-            selectedPost = nil
+        if dataSource.selectedPost == post {
+            dataSource.selectedPost = nil
         }
         bindingDelegate?.reloadAllData()
     }
     
     func dismissAllPosts() {
         dataSource.clear()
-        selectedPost = nil
         reloadData()
     }
     
     private func reloadData() {
         bindingDelegate?.reloadAllData()
+    }
+    
+    func saveStateUsing(coder: NSCoder) {
+        do {
+            let data = try JSONEncoder().encode(dataSource)
+            coder.encode(data, forKey: Constants.coderRestorationID)
+        } catch {
+            debugPrint(error.localizedDescription)
+        }
+    }
+    
+    func restoreStateUsing(coder: NSCoder) {
+        guard let decodedData = coder.decodeObject(forKey: Constants.coderRestorationID) as? Data,
+              let decodedDataSource = try? JSONDecoder().decode(MasteViewModelDataSource.self, from: decodedData) else {
+            return
+        }
+        
+        service.cancelCurrentRequest()
+        dataSource = decodedDataSource
+        reloadData()
+        bindingDelegate?.showDetail()
     }
     
     private func requestMorePostsUsingPage(_ page: TopRedditPage?) {

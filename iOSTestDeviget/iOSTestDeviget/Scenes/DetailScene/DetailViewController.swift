@@ -7,17 +7,20 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, DetailPresenter {
     
     enum SegueID {
         static let fullScreenImageIdentifier = "ShowFullScreenImage"
     }
 
-    
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var redditPostLabel: UILabel!
     @IBOutlet weak var isVideoLabel: UILabel!
+    
+    var hasDetailToPresent: Bool {
+        viewModel.validContent
+    }
     
     let imageDownloader: ImageDownloader = ImageDownloader()
     

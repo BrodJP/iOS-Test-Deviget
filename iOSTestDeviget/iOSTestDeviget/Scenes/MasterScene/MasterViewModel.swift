@@ -9,7 +9,7 @@ import Foundation
 
 protocol MasterViewModelBinding: class {
     func reloadAllData()
-    func reloadRedditPosts(_ posts: [RedditPostDTO])
+    func showDetail()
 }
 
 protocol MasterViewModel {
@@ -24,4 +24,6 @@ protocol MasterViewModel {
     func selectPost(_ post: RedditPostDTO)
     func dismissPost(_ post: RedditPostDTO)
     func dismissAllPosts()
+    func saveStateUsing(coder: NSCoder)
+    func restoreStateUsing(coder: NSCoder)
 }

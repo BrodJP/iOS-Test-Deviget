@@ -8,18 +8,25 @@
 import Foundation
 
 protocol DetailViewModel {
-    var redditPost: RedditPostDTO? { get }
-    
     var isVideoString: String { get }
     var redditPostAuthor: String? { get }
     var redditPostText: String? { get }
     var redditPostThumbnailURL: URL? { get }
     var contentURL: URL? { get }
     var mediaType: MediaType { get }
+    var validContent: Bool { get }
 }
 
-struct DefaultDetailViewModel: DetailViewModel {
+class DefaultDetailViewModel: DetailViewModel {
+    enum Constants {
+        static let coderRestorationID = "PostDetailObject"
+    }
+    
     var redditPost: RedditPostDTO?
+    
+    init(redditPost: RedditPostDTO? = nil) {
+        self.redditPost = redditPost
+    }
     
     var isVideoString: String {
         "(Video)"
@@ -44,4 +51,9 @@ struct DefaultDetailViewModel: DetailViewModel {
     var mediaType: MediaType {
         redditPost?.mediaType ?? .unknown
     }
+    
+    var validContent: Bool {
+        redditPost != nil
+    }
 }
+

@@ -144,6 +144,16 @@ class MasterViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        viewModel.saveStateUsing(coder: coder)
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        viewModel.restoreStateUsing(coder: coder)
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -155,7 +165,6 @@ extension MasterViewController: UICollectionViewDelegate {
           return
         }
         viewModel.selectPost(redditPost)
-        performSegue(withIdentifier: SegueID.detailIdentifier, sender: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -173,10 +182,8 @@ extension MasterViewController: MasterViewModelBinding {
         applySnapshot()
     }
     
-    func reloadRedditPosts(_ posts: [RedditPostDTO]) {
-        var snapshot = dataSource.snapshot()
-        snapshot.reloadItems(posts)
-        dataSource.apply(snapshot, animatingDifferences: true)
+    func showDetail() {
+        performSegue(withIdentifier: SegueID.detailIdentifier, sender: nil)
     }
 }
 

@@ -10,6 +10,7 @@ import Foundation
 protocol TopRedditProviderService {
     func fetchTopReddit(using page: TopRedditPage?,
                         completion: @escaping (Result<TopRedditResult, Error>) -> Void)
+    func cancelCurrentRequest()
 }
 
 class DefaultTopRedditProviderService: TopRedditProviderService {
@@ -22,7 +23,11 @@ class DefaultTopRedditProviderService: TopRedditProviderService {
     
     func fetchTopReddit(using page: TopRedditPage?,
                         completion: @escaping (Result<TopRedditResult, Error>) -> Void) {
-        currentTask?.cancel()
+        cancelCurrentRequest()
         currentTask = requester.request(RedditEndpoint.top(after: page?.after), completion: completion)
+    }
+    
+    func cancelCurrentRequest() {
+        currentTask?.cancel()
     }
 }

@@ -29,7 +29,8 @@ class DefaultMasterViewModelTestCases: XCTestCase {
                               createdTimeInUnix: 0,
                               thumbnail: nil,
                               contentURL: nil,
-                              numberOfComments: 0)
+                              numberOfComments: 0,
+                              isVideo: false)
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

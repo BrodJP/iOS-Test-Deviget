@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RedditPostDTO: Codable, Hashable {
+struct RedditPostDTO: Codable, Hashable {
     let redditPost: RedditPost
     var isRead: Bool
     var isSelected: Bool
@@ -27,8 +27,6 @@ class RedditPostDTO: Codable, Hashable {
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(isRead)
-        hasher.combine(isSelected)
         hasher.combine(redditPost.identifier)
     }
     

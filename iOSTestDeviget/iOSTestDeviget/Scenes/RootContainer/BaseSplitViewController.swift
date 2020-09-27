@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DetailPresenter {
+    var hasDetailToPresent: Bool { get }
+}
+
 class BaseSplitViewController: UISplitViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +39,10 @@ extension BaseSplitViewController: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController,
                              collapseSecondary secondaryViewController: UIViewController,
                              onto primaryViewController: UIViewController) -> Bool {
-        return true
+        guard let navController = secondaryViewController as? UINavigationController,
+            let presenter = navController.viewControllers.first as? DetailPresenter else {
+            return true
+        }
+        return !presenter.hasDetailToPresent
     }
 }
