@@ -9,6 +9,11 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    enum SegueID {
+        static let fullScreenImageIdentifier = "ShowFullScreenImage"
+    }
+
+    
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var redditPostLabel: UILabel!
@@ -23,6 +28,14 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+    }
+    
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? FullScreenImageViewController {
+            controller.viewModel = FullScreenImageViewModel(imageURL: viewModel.contentURL)
+        }
     }
     
     private func setupView() {
@@ -67,12 +80,7 @@ class DetailViewController: UIViewController {
     
     @objc
     func showFullScreenImage() {
-        
-    }
-    
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        performSegue(withIdentifier: SegueID.fullScreenImageIdentifier,
+                     sender: nil)
     }
 }

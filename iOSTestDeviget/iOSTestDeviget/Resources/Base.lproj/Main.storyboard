@@ -79,11 +79,67 @@
                         <outlet property="isVideoLabel" destination="axb-9A-bgZ" id="cLK-2S-uMO"/>
                         <outlet property="redditPostLabel" destination="M5a-Qj-0SX" id="Yz7-3k-l2I"/>
                         <outlet property="thumbnailImageView" destination="VQD-Gj-sl2" id="9XT-73-IXy"/>
+                        <segue destination="TOD-A6-cc7" kind="show" identifier="ShowFullScreenImage" id="EfH-mk-csc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l8l-LB-eey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="948" y="682"/>
+        </scene>
+        <!--Full Screen Image View Controller-->
+        <scene sceneID="BrK-Wf-AIJ">
+            <objects>
+                <viewController id="TOD-A6-cc7" customClass="FullScreenImageViewController" customModule="iOSTestDeviget" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vvY-Ce-5TG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ivv-gQ-jrz">
+                                <rect key="frame" x="0.0" y="88" width="414" height="724"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TGW-Y8-ls1">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5GZ-kw-Myw"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSaveButtonPressed:" destination="TOD-A6-cc7" eventType="touchUpInside" id="eyg-ip-1dv"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="SLw-Zj-suc">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2sN-uh-7YM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TGW-Y8-ls1" firstAttribute="leading" secondItem="2sN-uh-7YM" secondAttribute="leading" id="0G5-Hb-Bg9"/>
+                            <constraint firstItem="2sN-uh-7YM" firstAttribute="trailing" secondItem="Ivv-gQ-jrz" secondAttribute="trailing" id="0l3-YD-yNI"/>
+                            <constraint firstItem="Ivv-gQ-jrz" firstAttribute="top" secondItem="2sN-uh-7YM" secondAttribute="top" id="4iI-oE-ffo"/>
+                            <constraint firstItem="2sN-uh-7YM" firstAttribute="bottom" secondItem="TGW-Y8-ls1" secondAttribute="bottom" id="DR1-YZ-7C6"/>
+                            <constraint firstItem="TGW-Y8-ls1" firstAttribute="top" secondItem="Ivv-gQ-jrz" secondAttribute="bottom" id="Fao-NL-joZ"/>
+                            <constraint firstItem="2sN-uh-7YM" firstAttribute="trailing" secondItem="TGW-Y8-ls1" secondAttribute="trailing" id="Hsf-Iu-6YX"/>
+                            <constraint firstItem="Ivv-gQ-jrz" firstAttribute="leading" secondItem="2sN-uh-7YM" secondAttribute="leading" id="Prp-40-R5j"/>
+                            <constraint firstItem="SLw-Zj-suc" firstAttribute="centerY" secondItem="vvY-Ce-5TG" secondAttribute="centerY" id="RaV-C4-bx5"/>
+                            <constraint firstItem="SLw-Zj-suc" firstAttribute="centerX" secondItem="vvY-Ce-5TG" secondAttribute="centerX" id="wBS-7c-rS7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="U9D-Ez-Aan"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="SLw-Zj-suc" id="C5s-bp-8sl"/>
+                        <outlet property="imageView" destination="Ivv-gQ-jrz" id="IAk-pG-6vz"/>
+                        <outlet property="saveButton" destination="TGW-Y8-ls1" id="8JS-m4-Avc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xiX-0N-yYj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1720" y="682"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BZC-P2-dnM">

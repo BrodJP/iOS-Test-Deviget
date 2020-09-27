@@ -8,6 +8,8 @@
 import Foundation
 
 protocol DetailViewModel {
+    var redditPost: RedditPostDTO? { get }
+    
     var isVideoString: String { get }
     var redditPostAuthor: String? { get }
     var redditPostText: String? { get }
