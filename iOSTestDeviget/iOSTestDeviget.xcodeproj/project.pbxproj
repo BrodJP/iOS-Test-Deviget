@@ -22,6 +22,8 @@
 		9A73F9D0251FD6C600DD1C2B /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A73F9CF251FD6C600DD1C2B /* MediaType.swift */; };
 		9AEA935925211C3F0063CFF8 /* DefaultDetailViewModelTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEA935825211C3F0063CFF8 /* DefaultDetailViewModelTestCases.swift */; };
 		9AEA93652521201A0063CFF8 /* FullScreenImageViewModelTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEA93642521201A0063CFF8 /* FullScreenImageViewModelTestCases.swift */; };
+		9AEA936E252124F70063CFF8 /* topReddit.json in Resources */ = {isa = PBXBuildFile; fileRef = 9AEA936D252124F70063CFF8 /* topReddit.json */; };
+		9AEA9376252125330063CFF8 /* JSONDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AEA9375252125330063CFF8 /* JSONDataLoader.swift */; };
 		9AF12619251E8A350089D562 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF12618251E8A350089D562 /* AppDelegate.swift */; };
 		9AF12620251E8A350089D562 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AF1261E251E8A350089D562 /* Main.storyboard */; };
 		9AF12622251E8A390089D562 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AF12621251E8A390089D562 /* Assets.xcassets */; };
@@ -94,6 +96,8 @@
 		9A73F9CF251FD6C600DD1C2B /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		9AEA935825211C3F0063CFF8 /* DefaultDetailViewModelTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDetailViewModelTestCases.swift; sourceTree = "<group>"; };
 		9AEA93642521201A0063CFF8 /* FullScreenImageViewModelTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewModelTestCases.swift; sourceTree = "<group>"; };
+		9AEA936D252124F70063CFF8 /* topReddit.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = topReddit.json; sourceTree = "<group>"; };
+		9AEA9375252125330063CFF8 /* JSONDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDataLoader.swift; sourceTree = "<group>"; };
 		9AF12615251E8A350089D562 /* iOSTestDeviget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTestDeviget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF12618251E8A350089D562 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AF1261F251E8A350089D562 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -216,6 +220,15 @@
 			path = FullScreenImageScene;
 			sourceTree = "<group>";
 		};
+		9AEA936C252124890063CFF8 /* JSONSamples */ = {
+			isa = PBXGroup;
+			children = (
+				9AEA936D252124F70063CFF8 /* topReddit.json */,
+				9AEA9375252125330063CFF8 /* JSONDataLoader.swift */,
+			);
+			path = JSONSamples;
+			sourceTree = "<group>";
+		};
 		9AF1260C251E8A350089D562 = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +264,7 @@
 		9AF1262E251E8A390089D562 /* iOSTestDevigetTests */ = {
 			isa = PBXGroup;
 			children = (
+				9AEA936C252124890063CFF8 /* JSONSamples */,
 				9AF126C6251E9DC80089D562 /* Mocks */,
 				9A73F993251F9EC000DD1C2B /* Scenes */,
 				9AF12651251E8C880089D562 /* Networking */,
@@ -582,6 +596,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AEA936E252124F70063CFF8 /* topReddit.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +668,7 @@
 				9AF126BF251E9C9D0089D562 /* DefaultRequesterTestCases.swift in Sources */,
 				9A73F9A3251FAD0700DD1C2B /* TopRedditProviderServiceTestCases.swift in Sources */,
 				9AF12630251E8A390089D562 /* iOSTestDevigetTests.swift in Sources */,
+				9AEA9376252125330063CFF8 /* JSONDataLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -59,9 +59,10 @@ class DefaultMasterViewModelTestCases: XCTestCase {
         XCTAssertEqual(viewModel.redditPosts, dataSource.posts)
     }
     
-    func test_correct_initialization() {
+    func test_correct_initialization_forFailureFetch() {
         var dataSource = MasteViewModelDataSource()
         let service = TopRedditProviderServiceMock()
+        service.forceFetchFailure = true
         let mockPostDTO = RedditPostDTO(redditPost: mockPost)
         dataSource.posts = [mockPostDTO]
         let viewModel = DefaultMasterViewModel(service: service, dataSource: dataSource)
@@ -71,6 +72,28 @@ class DefaultMasterViewModelTestCases: XCTestCase {
         XCTAssertTrue(viewModel.redditPosts.isEmpty, "Expected posts to be cleared")
         XCTAssertNil(viewModel.selectedPost, "Expected selected posts to be cleared")
         XCTAssertTrue(service.fetchTopRedditCalled, "Expected service to fetch data")
+    }
+    
+    func test_requestMorePosts_executed_ifPostLessThanMaxNumberOfPosts() {
+        let dataSource = MasteViewModelDataSource()
+        let service = TopRedditProviderServiceMock()
+    
+        let viewModel = DefaultMasterViewModel(service: service, dataSource: dataSource)
+        viewModel.requestMorePosts()
+        
+        XCTAssertTrue(service.fetchTopRedditCalled, "Fetch must not happen")
+    }
+    
+    func test_requestMorePosts_success_populatesDataSource() {
+        let dataSource = MasteViewModelDataSource()
+        let service = TopRedditProviderServiceMock()
+    
+        let viewModel = DefaultMasterViewModel(service: service, dataSource: dataSource)
+        XCTAssertTrue(viewModel.redditPosts.isEmpty)
+        
+        viewModel.requestMorePosts()
+        
+        XCTAssertFalse(viewModel.redditPosts.isEmpty)
     }
     
     func test_requestMorePosts_notExecuted_ifMaxNumberOfPostsIsMet() {

@@ -10,12 +10,29 @@ import Foundation
 
 class TopRedditProviderServiceMock: TopRedditProviderService {
   
+    enum ServiceError: Error {
+        case forcedError
+    }
+    
     var fetchTopRedditCalled: Bool = false
     var cancelRequestCalled: Bool = false
+    var forceFetchFailure: Bool = false
     
     func fetchTopReddit(using page: TopRedditPage?,
                         completion: @escaping (Result<TopRedditResult, Error>) -> Void) {
         fetchTopRedditCalled = true
+        if forceFetchFailure {
+            completion(.failure(ServiceError.forcedError))
+            return
+        }
+        
+        do {
+            let data = try JSONDataLoader.topRedditData()
+            let result = try JSONDecoder().decode(TopRedditResult.self, from: data)
+            completion(.success(result))
+        } catch {
+            completion(.failure(error))
+        }
     }
     
     func cancelCurrentRequest() {
